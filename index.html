@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="CULPA API : The RESTful API to access CULPA data.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>CULPA API</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/culpa-team/API">View on GitHub</a>
+
+          <h1 id="project_title">CULPA API</h1>
+          <h2 id="project_tagline">The RESTful API to access CULPA data.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/culpa-team/API/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/culpa-team/API/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>Welcome to the CULPA API. <a href="http://culpa.info">CULPA</a> is the Columbia Underground Listing of Professor Ability. This API provides information about professors, courses, departments, and reviews. The endpoints, as well as the response formats, are described below.</p>
+
+<p>The API is hosted and available at <code>http://api.culpa.info</code></p>
+
+<h3>
+<a id="courses-courses" class="anchor" href="#courses-courses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Courses <code>/courses</code>
+</h3>
+
+<p>Course by ID - <code>/courses/course_id/&lt;course_id&gt;</code></p>
+
+<p>Courses by Search - <code>/courses/search/&lt;search_query&gt;</code></p>
+
+<p>Courses by Department - <code>/courses/department_id/&lt;department_id&gt;</code></p>
+
+<p>Response Format</p>
+
+<p><code>courses</code> - An array of course objects that match the query.</p>
+
+<p>    <code>department_id</code> - An array of ids representing the departments to which a course belongs.</p>
+
+<p>    <code>id</code> - The id of the course.</p>
+
+<p>    <code>name</code> - The name of the course.</p>
+
+<p>    <code>number</code> - The course directory number.</p>
+
+<p><code>status</code> - Either success or failure depending on the result of the query.</p>
+
+<p>Sample Response</p>
+
+<pre><code>{
+    "courses": [
+        {
+            "department_ids": [
+                7
+            ],
+            "id": 4,
+            "name": "Data Structures in Java",
+            "number": "COMS W3134"
+        }
+    ],
+    "status": "success"
+}
+</code></pre>
+
+<h3>
+<a id="departments-departments" class="anchor" href="#departments-departments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Departments <code>/departments</code>
+</h3>
+
+<p>Department by ID - <code>/departments/department_id/&lt;department_id&gt;</code></p>
+
+<p>Departments by Search - <code>/departments/search/&lt;search_query&gt;</code></p>
+
+<p>Departments by Professor - <code>/departments/professor_id/&lt;professor_id&gt;</code></p>
+
+<p>Response Format</p>
+
+<p><code>departments</code> - An array of department objects that match the query.</p>
+
+<p>    <code>id</code> - The id of the department.</p>
+
+<p>    <code>name</code> - The name of the department.</p>
+
+<p>    <code>nickname</code> - A shortened version of the name of the department.</p>
+
+<p><code>status</code> - Either success or failure depending on the result of the query.</p>
+
+<p>Sample Response</p>
+
+<pre><code>{
+    "departments": [
+        {
+            "id": 7,
+            "name": "Computer Science",
+            "nickname": "comp sci"
+        }
+    ],
+    "status": "success"
+}
+</code></pre>
+
+<h3>
+<a id="professors-professors" class="anchor" href="#professors-professors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Professors <code>/professors</code>
+</h3>
+
+<p>Professor by ID - <code>/professors/professor_id/&lt;professor_id&gt;</code></p>
+
+<p>Professors by Search - <code>/professors/search/&lt;search_query&gt;</code></p>
+
+<p>Professors by Department - <code>/professors/department_id/&lt;department_id&gt;</code></p>
+
+<p>Silver Nugget Professors - <code>/professors/silver_nuggets</code></p>
+
+<p>Gold Nugget Professors - <code>/professors/gold_nuggets</code></p>
+
+<p>Response Format</p>
+
+<p><code>professors</code> - An array of professor objects that match the query.</p>
+
+<p>    <code>first_name</code> - The first name of the professor.</p>
+
+<p>    <code>id</code> - The id of the professor.</p>
+
+<p>    <code>last_name</code> - The last name of the professor.</p>
+
+<p>    <code>middle_name</code> - The middle name of the professor. Quite often either blank or null.</p>
+
+<p>    <code>nugget</code> - The CULPA nugget the professor has, either "Gold", "Silver", or "None".</p>
+
+<p><code>status</code> - Either success or failure depending on the result of the query.</p>
+
+<p>Sample Response</p>
+
+<pre><code>{
+    "professors": [
+        {
+            "first_name": "Anargyros",
+            "id": 2762,
+            "last_name": "Papageorgiou",
+            "middle_name": "",
+            "nugget": "Gold"
+        }
+    ],
+    "status": "success"
+}
+</code></pre>
+
+<h3>
+<a id="reviews-reviews" class="anchor" href="#reviews-reviews" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reviews <code>/reviews</code>
+</h3>
+
+<p>Review by ID - <code>/reviews/review_id/&lt;review_id&gt;</code></p>
+
+<p>Reviews by Professor - <code>/reviews/professor_id/&lt;professor_id&gt;</code></p>
+
+<p>Reviews by Course - <code>/reviews/course_id/&lt;course_id&gt;</code></p>
+
+<p>Response Format</p>
+
+<p><code>reviews</code> - An array of review objects that match the query</p>
+
+<p>    <code>course_ids</code> - An array of ids of courses associated with the review.</p>
+
+<p>    <code>created</code> - The time and date at which the review was created.</p>
+
+<p>    <code>id</code> - The id of the review.</p>
+
+<p>    <code>professor_ids</code> - An array of ids of professors associated with the review.</p>
+
+<p>    <code>review_text</code> - The body text of the review.</p>
+
+<p>    <code>workload_text</code> - The workload text of the review.</p>
+
+<p><code>status</code> - Either success or failure depending on the result of the query.</p>
+
+<p>Sample Response</p>
+
+<pre><code>{
+    "reviews": [
+        {
+            "course_ids": [
+                995
+            ],
+            "created": "Thu, 09 May 2002 00:00:00 GMT",
+            "id": 2540,
+            "professor_ids": [
+                42
+            ],
+            "review_text": "John Kender is a very good teacher who makes every lecture interesting and worthwhile. I definitely recommend taking a class with him if possible. His only fault is that he will speak more and more softly as a sentence progresses, making it impossible to understand what he is saying.",
+            "workload_text": "Problem Sets every other week which will require several hours of continuous work"
+        }
+    ],
+    "status": "success"
+}
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">CULPA API maintained by <a href="https://github.com/culpa-team">culpa-team</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
